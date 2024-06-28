@@ -6,7 +6,7 @@
     <title>RG APP</title>
     <style>
         body {
-            background-color: #313030;
+            background-color: #f0f0f0;
             margin: 0;
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -22,6 +22,10 @@
             font-family: 'Georgia', 'Times New Roman', Times, serif;
             color: #333;
             margin-bottom: 20px;
+            transition: opacity 0.3s;
+        }
+        h1.hidden {
+            opacity: 0;
         }
         .iframe-container {
             position: relative;
@@ -49,10 +53,25 @@
     </style>
 </head>
 <body>
-    <h1>RG APP</h1>
-    <div class="iframe-container">
+    <h1 id="header">RG APP</h1>
+    <div class="iframe-container" id="iframeContainer">
         <div class="loader" id="loader">Loading...</div>
-        <iframe src="https://docs.google.com/viewer?url=https://github.com/prasadbamane/Consent-Neerman/raw/main/RGAPPTA.pdf&embedded=true" onload="document.getElementById('loader').style.display='none'"></iframe>
+        <iframe src="https://docs.google.com/viewer?url=https://github.com/prasadbamane/Consent-Neerman/raw/main/RGAPPTA.pdf&embedded=true" onload="document.getElementById('loader').style.display='none'" id="pdfIframe"></iframe>
     </div>
+    <script>
+        const header = document.getElementById('header');
+        const iframeContainer = document.getElementById('iframeContainer');
+
+        window.addEventListener('scroll', () => {
+            const iframeContainerRect = iframeContainer.getBoundingClientRect();
+            const threshold = 50;  // Adjust this value as needed
+
+            if (iframeContainerRect.top < threshold) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
